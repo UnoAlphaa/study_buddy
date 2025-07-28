@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 
 
 
+
 const navItems = [
     {
         label : "Home",
@@ -29,7 +30,7 @@ const NavItems = () => {
   return (
     <nav className='flex items-center gap-4'>
         {navItems.map(({label, href})=>(
-            <Link href={href} key={label} className={cn(pathname === href && "text-primary font-semibold")}>
+            <Link href={href} key={label} className={cn(pathname === href && "text-[#FE5933] font-semibold")}>
                 {label}
             </Link>
         ))}
