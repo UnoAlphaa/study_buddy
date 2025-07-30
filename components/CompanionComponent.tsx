@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import soundwaves from '../constants/soundwaves.json'
+import { addToSessionHistory } from '@/lib/actions/companions.actions';
 
 enum CallStatus {
     INACTIVE = "INACTIVE",
@@ -16,6 +17,10 @@ enum CallStatus {
 const CompanionComponent = ({
     companionId, subject, topic, name, userName, userImage, style, voice
 }: CompanionComponentProps) => {
+
+
+    //console.log(companionId);
+
 
     const [callStatus, setCallStatus] = useState(CallStatus.INACTIVE);
     const [isSpeaking, setIsSpeaking] = useState(false);
@@ -36,7 +41,11 @@ const CompanionComponent = ({
 
     useEffect(() => {
         const onCallStart = () => setCallStatus(CallStatus.ACTIVE);
-        const onCallend = () => setCallStatus(CallStatus.FINISHED);
+        const onCallend = () => {
+            setCallStatus(CallStatus.FINISHED)
+            //addToSessionHistory(companionID)
+            addToSessionHistory(companionId);
+        };
         const onMessage = (message: Message) => {
             if (message.type === 'transcript' && message.transcriptType === 'final') {
                 const newMessage = { role: message.role, content: message.transcript }
@@ -129,7 +138,7 @@ const CompanionComponent = ({
                         <p className='font-bold text-2xl'>{userName}</p>
                     </div>
 
-                    <button className='btn-mic' onClick={toggleMicrophone}>
+                    <button className='btn-mic' onClick={toggleMicrophone} disabled={callStatus !== CallStatus.ACTIVE}>
                         <Image
                             src={isMuted ? `/icons/mic-off.svg` : `/icons/mic-on.svg`}
                             alt='mic'

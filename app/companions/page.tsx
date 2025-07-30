@@ -3,6 +3,7 @@ import SearchInput from "@/components/SearchInput";
 import SubjectFilter from "@/components/SubjectFilter";
 import { getAllCompanions } from "@/lib/actions/companions.actions";
 import { getSubjectColor } from "@/lib/utils";
+import Image from "next/image";
 
 
 const CompanionLibrary = async ({searchParams} : SearchParams ) => {
@@ -13,7 +14,6 @@ const CompanionLibrary = async ({searchParams} : SearchParams ) => {
 
   const companions = await getAllCompanions({subject, topic})
 
-  console.log(companions)
   
 
   return (
@@ -31,6 +31,16 @@ const CompanionLibrary = async ({searchParams} : SearchParams ) => {
           {companions.map((companion)=>(
             <CompanionCard key={companion.id} {...companion} color={getSubjectColor(companion.subject)} />
           ))}
+
+          {companions.length === 0 && (
+            <main className="flex  items-center justify-center">
+              <div className="flex flex-col items-center justify-center">
+                  <Image src={`/images/caution.png`} alt="caution" width={200} height={200} />
+                  <p className="text-primary text-center text-4xl">No companions found</p>
+                  <p className="text-center text-sm text-[#F75353] font-bold ">search for a valid companion</p>
+              </div>
+            </main>
+          )}
       </section>
     </main>
   )

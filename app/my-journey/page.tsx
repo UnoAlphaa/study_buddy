@@ -2,7 +2,7 @@
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <main>Profile component goes here</main>
   )
 }
 
