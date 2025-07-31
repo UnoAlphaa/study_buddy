@@ -66,7 +66,7 @@ const CompanionsList = ({title, companions, classNames} : CompanionsListProps) =
                                 <div className="flex items-center justify-center p-2 rounded-lg w-fit md:hidden"
                                 style={{backgroundColor : getSubjectColor(subject)}}
                                 >
-                                    <Image src={`/icons/${subject}.svg`} alt={subject}
+                                    <Image src={`/icons/${subject}.svg`} alt="subject"
                                     width={18}
                                     height={18}
                                     /> 

@@ -1,11 +1,13 @@
+import HomeBtn from "@/components/HomeBtn"
 import { PricingTable } from "@clerk/nextjs"
 
 
 const Subscription = () => {
   return (
-    <div>
+    <main>
+      <HomeBtn />
       <PricingTable />
-    </div>
+    </main>
   )
 }
 
